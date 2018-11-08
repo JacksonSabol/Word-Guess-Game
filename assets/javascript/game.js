@@ -12,3 +12,26 @@ var wins = 0;
 var losses = 0;
 var guessesRemaining = 10;
 
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function (event) {
+
+        // Determines which key was pressed.
+        var userGuess = event.key;
+
+        // Make lowercase just in case user has capslock on
+        userGuess = userGuess.toLowerCase();
+  
+        // Run function when any letter key is pressed
+        if (userGuess >= 'a' && userGuess <= 'z') {
+			startGame();
+        }
+        // Alert user to press any letter key to begin
+		else {
+			alert("Press any letter key to begin!");
+		}
+    };
+
+    // Function to begin game
+    function startGame () {
+
+    }
