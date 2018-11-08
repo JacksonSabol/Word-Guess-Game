@@ -11,32 +11,63 @@ var wordIndex = 0;
 var wins = 0;
 var losses = 0;
 var guessesRemaining = 10;
+// Define randomWord globally to use in loop; not sure I need to do this since I defined it in the function below
+// var randomWord;
+// Define a variable to compare the letters of a random word to the letters of the user's guess; not sure I need to do this for the same reason as above
+// var randomWordLetters;
 
-    // This function is run whenever the user presses a key.
-    document.onkeyup = function (event) {
+// This function is run whenever the user presses a key.
+document.onkeyup = function (event) {
 
-        // Determines which key was pressed.
-        var userGuess = event.key;
+    // Determines which key was pressed.
+    var userGuess = event.key;
 
-        // Make lowercase just in case user has capslock on
-        userGuess = userGuess.toLowerCase();
-  
-        // Run function when any letter key is pressed
+    // Make lowercase just in case user has capslock on
+    userGuess = userGuess.toLowerCase();
+
+    // Run function when any letter key is pressed
+    if (userGuess >= 'a' && userGuess <= 'z') { // consider using onkeyup or down so that any key could be pressed; or userGuess =/= ""
+        startGame();
+        // consolelogs the key the user pressed (userGuess).
+        console.log("User guess: " + userGuess);
         if (userGuess >= 'a' && userGuess <= 'z') {
-			startGame();
-        }
-        // Alert user to press any letter key to begin
-		else {
-			alert("Press any letter key to begin!");
-		}
-    };
+            // Define variable to compare whether userGuess matches a letter in randomWord and output correct or incorrect
+			var letterMatch = false;
+			for (var j = 0; j < randomWord.length; j++) {
+                // Compare if userGuess matches a letter in randomWord for every index equal to the letter length of randomWord
+				if (userGuess === randomWord[j]) {
+                    // Set randomWordLetters to userGuess when the user guesses a letter correctly
+                    randomWordLetters[j] = userGuess;
+                    // Set letterMatch to true when user guesses a letter correctly to output "correct guess"
+					letterMatch = true;
+                }
+                // Console log correct letter guess for testing
+                console.log(letterMatch);
 
-    // Function to begin game
-    function startGame () {
-        // Generate random index to call a random word from wordsArray
-        randomIndex = Math.floor(Math.random() * wordsArray.length);
-        // Set randomWord to the random index position of wordsArray
-        randomWord = wordsArray[randomIndex];
-        // Test randomWord generator
-        console.log(randomWord);
+                // Problems to solve and pseudocode:
+                // stop generating random word every time a letter is pressed 
+                // Probably need to nest another if statement in the one above so that it compares multiple guesses to the same word before restarting
+                // create an array for letters that have been guessed
+                // create an array for correct and incorrect letters
+                // display correct number of "_" for each letter of each random word
+                // save index location of correct letters to display correct letters instead of "_" in DOM
+                // subtract from guessesRemaining after each round
+                // 
+            } 
+		}
     }
+    // Alert user to press any letter key to begin
+    else {
+        alert("Press any letter key to begin!");
+    }
+};
+
+// Function to begin game
+function startGame() {
+    // Generate random index to call a random word from wordsArray
+    randomIndex = Math.floor(Math.random() * wordsArray.length);
+    // Set randomWord to the random index position of wordsArray
+    randomWord = wordsArray[randomIndex];
+    // Test randomWord generator
+    console.log(randomWord);
+}
