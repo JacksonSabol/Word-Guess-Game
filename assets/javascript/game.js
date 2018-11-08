@@ -11,6 +11,9 @@ var wordIndex = 0;
 var wins = 0;
 var losses = 0;
 var guessesRemaining = 10;
+// Create an array for letters guessed to reference if user pushes the same letter key again
+var lettersGuessed = [];
+
 // Define randomWord globally to use in loop; not sure I need to do this since I defined it in the function below
 // var randomWord;
 // Define a variable to compare the letters of a random word to the letters of the user's guess; not sure I need to do this for the same reason as above
@@ -36,14 +39,22 @@ document.onkeyup = function (event) {
 			for (var j = 0; j < randomWord.length; j++) {
                 // Compare if userGuess matches a letter in randomWord for every index equal to the letter length of randomWord
 				if (userGuess === randomWord[j]) {
-                    // Set randomWordLetters to userGuess when the user guesses a letter correctly
-                    randomWordLetters[j] = userGuess;
+                    // Set lettersGuessed to userGuess to create array for reference if user pushes same key again
+                    lettersGuessed[j] = userGuess;
                     // Set letterMatch to true when user guesses a letter correctly to output "correct guess"
 					letterMatch = true;
                 }
                 // Console log correct letter guess for testing
                 console.log(letterMatch);
-
+                if (match === false) {
+                    if (lettersGuessed.includes(userGuess)){
+                        console.log("You've already guessed this letter - select a new letter");
+                    }
+                    else {
+                        guessesRemaining--
+                        // Target html and output message later when logic is done
+                    }
+                }
                 // Problems to solve and pseudocode:
                 // stop generating random word every time a letter is pressed 
                 // Probably need to nest another if statement in the one above so that it compares multiple guesses to the same word before restarting
