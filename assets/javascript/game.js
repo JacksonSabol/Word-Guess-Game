@@ -33,5 +33,10 @@ var guessesRemaining = 10;
 
     // Function to begin game
     function startGame () {
-
+        // Generate random index to call a random word from wordsArray
+        randomIndex = Math.floor(Math.random() * wordsArray.length);
+        // Set randomWord to the random index position of wordsArray
+        randomWord = wordsArray[randomIndex];
+        // Test randomWord generator
+        console.log(randomWord);
     }
