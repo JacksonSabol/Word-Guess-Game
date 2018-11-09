@@ -1,12 +1,6 @@
 // Array of words to choose from
 var wordsArray = ["spaceship", "planet", "orbit", "railgun", "alien", "invasion", "warpspeed", "reactor", "shields", "bridge"];
 
-// Start the game with a score of 0
-var score = 0;
-
-// Variable to hold the index of current word
-var wordIndex = 0;
-
 // Setting variables for wins, losses, and number of guesses remaining
 var wins = 0;
 var losses = 0;
@@ -119,93 +113,6 @@ document.onkeyup = function (event) {
         }
     }
 };
-
-// consolelogs the key the user pressed (userGuess).
-// console.log("User guess: " + userGuess);
-// // console log correctLetters to test how things are working.
-// // console.log("hiddenWord: " + hiddenWord); this throws an error so let's not include it and see what happens
-// // same for letterMatch
-// console.log("letterMatch: " + letterMatch);
-// // same for incorrectLetters. 
-// console.log("incorrectLetters: " + incorrectLetters);
-// // same
-// console.log("guessesRemaining: " + guessesRemaining);
-
-    // make sure user is inputting keys that are letters. Otherwise output alert to press only letters
-    // for (i = 0; i < letters.length; i++) {
-    //     if (userGuess != letters[i]) { // compare to array of whitelisted letters or look up reject online
-    //         alert("Please use letter keys to make a guess");
-    //     }
-    //     else {
-
-    // Define variable to compare whether userGuess matches a letter in randomWord and output correct or incorrect
-    // var letterMatch = false;
-    // if (lettersGuessed.includes(userGuess)) {
-    //     console.log("You've already guessed this letter - select a new letter");
-    // }
-    // else {
-    //     for (j = 0; j < randomWord.length; j++) {
-    //         // Compare if userGuess matches a letter in randomWord for every index equal to the letter length of randomWord
-    //         if (userGuess === randomWord[j]) {
-    //             // Set lettersGuessed to userGuess when correct to create array for reference if user pushes same key again; lettersGuessed[i] is for repeat letters in a word
-    //             lettersGuessed[j] = userGuess;
-    //             // Set correctLetters to the correct letters the user guessed
-    //             correctLetters.push(j);
-    //             // Set letterMatch to true when user guesses a letter correctly to output "correct guess"
-    //             // letterMatch = true;
-    //         }
-    //     }
-    //     // Console log letterMatch for testing
-    //     // console.log("letterMatch: " + letterMatch);
-    //     // console log correctLetters to test how things are working. It catalogues the index position of each correct letter 
-    //     console.log("correctLetters: " + correctLetters);
-    //     // same for lettersGuessed. This is conserved and can be used to compare lengths later for the win statement
-    //     console.log("lettersGuessed: " + lettersGuessed);
-
-    //     // When userGuess doesn't match any letters in the random word
-    //     // if (letterMatch === false) {
-    //     // Attempting to use for-loop for incorrect guesses
-    //     for (k = 0; k < lettersGuessed.length; k++) {
-    //         // Compare userGuess to the letters of the random word
-    //         if (lettersGuessed[k] > -1) {
-    //             // Add userGuess to end of lettersGuessed array when it's an incorrect guess as well
-    //             incorrectLetters[k] = userGuess;
-    //             // var lettersAdjusted = incorrectLetters.length
-    //             // Set incorrectLetters to the correct letters the user guessed
-    //             lettersGuessed.push(incorrectLetters);
-    //             // subtract 1 from guessesRemaining to get 1 step closer to the end of the game
-    //             guessesRemaining--
-    //         }
-    //     }
-    //     // Target html and output message later when logic is done
-
-    //     // End game once remaining guesses reaches 0
-    //     if (guessesRemaining === 0) {
-    //         losses++;
-    //         console.log("You Lost!");
-    //         // figure out how to reset the game here
-    //     }
-
-    //     // Compare length of correctLetters to the number of letters in the random word. If they're the same, the word was guessed correctly.
-    //     if (correctLetters.length === randomWord.length) {
-    //         wins++;
-    //         console.log("You won!");
-    //         // figure out how to reset the game here
-    //     }
-
-    //     // Problems to solve and pseudocode:
-    //     // stop generating random word every time a letter is pressed 
-    //     // Probably need to nest another if statement in the one above so that it compares multiple guesses to the same word before restarting
-    //     // create an array for letters that have been guessed |done|
-    //     // create an array for correct and incorrect letters
-    //     // display correct number of "_" for each letter of each random word
-    //     // save index location of correct letters to display correct letters instead of "_" in DOM
-    //     // subtract from guessesRemaining after each round |done|
-    //     // 
-    // }
-    // Console log letterMatch for testing
-    // console.log("letterMatch: " + letterMatch);
-
 
 // Function to begin game
 function beginGame() {
