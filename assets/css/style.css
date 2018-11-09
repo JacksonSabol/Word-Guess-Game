@@ -1,0 +1,15 @@
+body {
+    background-image: url("../images/background.png");
+ }
+
+h2, h3, h4 {
+    color: rgb(0, 192, 86);
+}
+
+ .bg-transparent {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";       /* IE 8 */
+    filter: alpha(opacity=75);  /* IE 5-7 */
+    -moz-opacity: 0.75;          /* Netscape */
+    -khtml-opacity: 0.75;        /* Safari 1.x */
+    opacity: 0.75;               /* Good browsers */
+ }
