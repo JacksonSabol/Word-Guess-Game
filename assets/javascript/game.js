@@ -45,7 +45,7 @@ document.onkeyup = function (event) {
             beginGame();
         }
         else {
-            document.getElementById("generate-word").innerHTML = "Press 1 to generate a new word";
+            document.getElementById("generate-word").innerHTML = "o7 Captain. Press 1 to generate a new word.";
         }
 
     }
@@ -62,19 +62,74 @@ document.onkeyup = function (event) {
                     letterMatch = true;
                 }
             }
+            // Push correctly guessed letters to their respective positions in the HTML
             document.getElementById("word-to-guess").innerHTML = " " + hiddenWord.join(" ");
+
+            // If the user did not select a correct letter, letterMatch stays false and is referenced here
+            if (letterMatch === false) {
+                // Check to see if the letter has been guessed before
+                if (incorrectLetters.includes(userGuess)) {
+                    document.getElementById("generate-word").innerHTML = "Take it slow, Captain. You've already guessed that letter.";
+                }
+                // If it hasn't been guessed before, and isn't a correct letter, add it to the array of incorrect letters
+                else {
+                    incorrectLetters.push(userGuess);
+                    // Output to HTML element
+                    document.getElementById("user-guess").innerHTML = " " + incorrectLetters.join(" ");
+                    // Subtract 1 from the number of user choices remaining
+                    guessesRemaining--;
+                    // Output to HTML element
+                    document.getElementById("guesses-remaining").innerHTML = " " + guessesRemaining;
+                    // Check if the user is out of guesses
+                    if (guessesRemaining === 0) {
+                        // Output lose message
+                        document.getElementById("game-over").innerHTML = "YOU LOSE! The word you were trying to guess was:"
+                        // Reveal full word to user
+                        document.getElementById("word-to-guess").innerHTML = " " + randomWord;
+                        // Add 1 to losses
+                        losses++;
+                        // Output added loss to HTML
+                        document.getElementById("losses").innerHTML = " " + losses;
+                        // Reset start message
+                        document.getElementById("generate-word").innerHTML = "o7 Captain. Press 1 to generate a new word.";
+                        // Reset random word
+                        randomWord = "";
+                    }
+                }
+            }
+            // If all letters have been correctly guessed
+            if (hiddenWord.join("") == randomWord) {
+                // Add 1 to wins
+                wins++;
+                // Output added win to HTML
+                document.getElementById("wins").innerHTML = " " + wins;
+                // Output win message
+                document.getElementById("game-over").innerHTML = "YOU WIN! I see a promotion in your near future!"
+                // Reveal full word to user
+                document.getElementById("word-to-guess").innerHTML = " " + randomWord;
+                // Reset start message
+                document.getElementById("generate-word").innerHTML = "o7 Captain. Press 1 to generate a new word.";
+                // Reset random word
+                randomWord = "";
+            }
+        }
+        // If the user doesn't pretty a letter key, output message to the HTML
+        else {
+            document.getElementById("generate-word").innerHTML = "Press any letter key to make a guess, Captain.";
         }
     }
-    // consolelogs the key the user pressed (userGuess).
-    console.log("User guess: " + userGuess);
-    // console log correctLetters to test how things are working.
-    // console.log("hiddenWord: " + hiddenWord); this throws an error so let's not include it and see what happens
-    // same for letterMatch
-    console.log("letterMatch: " + letterMatch);
-    // same for incorrectLetters. 
-    console.log("incorrectLetters: " + incorrectLetters);
-    // same
-    console.log("guessesRemaining: " + guessesRemaining);
+};
+
+// consolelogs the key the user pressed (userGuess).
+// console.log("User guess: " + userGuess);
+// // console log correctLetters to test how things are working.
+// // console.log("hiddenWord: " + hiddenWord); this throws an error so let's not include it and see what happens
+// // same for letterMatch
+// console.log("letterMatch: " + letterMatch);
+// // same for incorrectLetters. 
+// console.log("incorrectLetters: " + incorrectLetters);
+// // same
+// console.log("guessesRemaining: " + guessesRemaining);
 
     // make sure user is inputting keys that are letters. Otherwise output alert to press only letters
     // for (i = 0; i < letters.length; i++) {
@@ -151,7 +206,6 @@ document.onkeyup = function (event) {
     // Console log letterMatch for testing
     // console.log("letterMatch: " + letterMatch);
 
-};
 
 // Function to begin game
 function beginGame() {
