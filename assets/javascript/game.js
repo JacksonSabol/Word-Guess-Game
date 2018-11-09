@@ -12,6 +12,12 @@ var wins = 0;
 var losses = 0;
 var guessesRemaining = 10;
 
+// Get HTML elements
+document.getElementById("wins").innerHTML = " " + wins;
+document.getElementById("losses").innerHTML = " " + losses;
+document.getElementById("guesses-remaining").innerHTML = " " + guessesRemaining;
+document.getElementById("wordtoguess").innerHTML = "";
+
 // Create an array for letters guessed to reference if user pushes the same letter key again and to keep track of correct/incorrect guesses
 var lettersGuessed = [];
 var correctLetters = [];
@@ -26,7 +32,7 @@ var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 // var randomWordLetters;
 
 // Generate random index and word before function so it stops picking a new one every time a key is pressed
-var randomIndex = Math.floor(Math.random() * wordsArray.length);
+
 // Set randomWord to the random index position of wordsArray
 var randomWord = wordsArray[randomIndex];
 // Test randomWord generator
@@ -36,6 +42,8 @@ console.log(randomWord);
 
 // This function is run whenever the user presses a key.
 document.onkeyup = function (event) {
+    // Hide Press 1 to start a game
+    document.getElementById("generate-word").innerHTML = "";
 
     // Determines which key was pressed.
     var userGuess = event.key;
@@ -43,8 +51,17 @@ document.onkeyup = function (event) {
     // Make lowercase just in case user has capslock on
     userGuess = userGuess.toLowerCase();
 
-    // inform user to press 1 to begin. I'll try to figure out how to do any key later
-    // alert("Press 1 to begin");
+    // Begin game if no word is loaded and 1 is pressed- initiate function; inform user to press 1 to begin if they press anything else
+    if (randomWord === "") {
+
+        if (userGuess === "1") {
+            beginGame();
+        }
+        else {
+            document.getElementById("generate-word").innerHTML = "Press 1 to generate a new word";
+        }
+
+    }
 
     // Start game when the number 1 key is pressed
     // if (userGuess === "1") { // can reactivate this later when the script actually works. Consider using onkeyup or down so that any key could be pressed; or userGuess =/= ""
@@ -87,13 +104,14 @@ document.onkeyup = function (event) {
         // When userGuess doesn't match any letters in the random word
         // if (letterMatch === false) {
         // Attempting to use for-loop for incorrect guesses
-        for (k = 0; k < randomWord.length; k++) {
+        for (k = 0; k < lettersGuessed.length; k++) {
             // Compare userGuess to the letters of the random word
-            if (userGuess != randomWord[k]) {
+            if (lettersGuessed[k] > -1) {
                 // Add userGuess to end of lettersGuessed array when it's an incorrect guess as well
-                lettersGuessed.push(userGuess);
+                incorrectLetters[k] = userGuess;
+                // var lettersAdjusted = incorrectLetters.length
                 // Set incorrectLetters to the correct letters the user guessed
-                incorrectLetters.push(k);
+                lettersGuessed.push(incorrectLetters);
                 // subtract 1 from guessesRemaining to get 1 step closer to the end of the game
                 guessesRemaining--
             }
@@ -149,11 +167,25 @@ document.onkeyup = function (event) {
 // };
 
 // Function to begin game
-// function startGame() {
-//     // Generate random index to call a random word from wordsArray
-//     randomIndex = Math.floor(Math.random() * wordsArray.length);
-//     // Set randomWord to the random index position of wordsArray
-//     randomWord = wordsArray[randomIndex];
-//     // Test randomWord generator
-//     console.log(randomWord);
-// }
+function beginGame() {
+    // Create random number to pick random index position in words array
+    var randomIndex = Math.floor(Math.random() * wordsArray.length);
+    // Use random index position to pick random word from array
+    randomWord = wordsArray[randomIndex];
+    // Create array with length of each, specific random word to output correct number of underscores
+    hiddenWord = new Array(randomWord.length);
+    // Set/reset incorrect choices array
+    incorrectLetters = [];
+    // Set/reset remaining choices array
+    guessesRemaining = 10;
+
+    // Output the correct number of underscores for each random word
+    for (var i = 0; i < hiddenWord.length; i++) {
+        hiddenWord[i] = "_";
+    }
+
+    // Set/reset all HTML elements
+    document.getElementById("word-to-guess").innerHTML = " " + hiddenWord.join(" ");
+    document.getElementById("user-guess").innerHTML = " " + incorrectletters.join(" ");
+    document.getElementById("guesses-remaining").innerHTML = " " + guessesRemaining;
+};
