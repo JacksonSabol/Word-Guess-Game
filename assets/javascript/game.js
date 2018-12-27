@@ -23,9 +23,8 @@ var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 
 // This function is run whenever the user presses a key.
 document.onkeyup = function (event) {
-    // Hide Press 1 to start a game
-    document.getElementById("generate-word").innerHTML = "";
-
+    // Hide Win/Lose message at the start of the next word to guess
+    document.getElementById("game-over").innerHTML = " -------------------------------------- ";
     // Determines which key was pressed.
     var userGuess = event.key;
 
@@ -98,7 +97,7 @@ document.onkeyup = function (event) {
                 // Output added win to HTML
                 document.getElementById("wins").innerHTML = " " + wins;
                 // Output win message
-                document.getElementById("game-over").innerHTML = "YOU WIN! I see a promotion in your near future!"
+                document.getElementById("game-over").innerHTML = "YOU WIN! I see a promotion in your near future!";
                 // Reveal full word to user
                 document.getElementById("word-to-guess").innerHTML = " " + randomWord;
                 // Reset start message
@@ -116,6 +115,8 @@ document.onkeyup = function (event) {
 
 // Function to begin game
 function beginGame() {
+    // Hide Press 1 to start a game
+    document.getElementById("generate-word").innerHTML = "";
     // Create random number to pick random index position in words array
     var randomIndex = Math.floor(Math.random() * wordsArray.length);
     // Use random index position to pick random word from array
