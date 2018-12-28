@@ -1,6 +1,6 @@
 # Welcome!
 
-### The following project is Assignment 3 of the UCB Full Stack Coding Bootcamp
+### The following project is Sci-Fi themed, Hangman-style word guessing game
 
 
 
